@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="./Estils/estils.css">
-	<title>Practica 4</title>
+	<title>Practica 5</title>
 </head>
 <body>
  <!--En aquest div mostrarem una barra en que es trobara l'opció de logar-se o enregistrar-se  -->   
