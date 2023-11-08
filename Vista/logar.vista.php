@@ -19,9 +19,11 @@
 
         <input type="submit" value="Inciar Sessió" name="submit">
         <input type="button" value="Tornar enrere"  onclick="window.location.href='../index.php'"> 
+        <input type="button" value="Recuperar Contrasenya"  onclick="window.location.href='recuperar.php'"> 
+        <input type="button" value="Iniciar sessió amb GitHub"  onclick="window.location.href='githubHybrid.php'"> 
   </form>
 
-  <button onclick="window.location.href='githubHybrid.php'">Iniciar sessió amb GitHub</button>
+
 </div>
   
 </body>
