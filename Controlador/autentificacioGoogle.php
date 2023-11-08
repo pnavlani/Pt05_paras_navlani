@@ -1,5 +1,5 @@
 <?php
-  require_once 'autentificacioGoogle.php';
+  require_once 'googleAuth.php';
 
 // authenticate code from Google OAuth Flow
 if (isset($_GET['code'])) {
