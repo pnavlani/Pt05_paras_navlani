@@ -83,4 +83,22 @@ input[type=email]:hover {
   background-color: #2580b4;
 }
 
+/*Google Auth */
+
+.enllaç {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.enllaç {
+  text-decoration-line: none;
+  font-family: inherit;
+  padding-top: 20px;
+  padding-left: 3px;
+}
+.enllaç img {
+  width: 30px;
+  height: 20px;
+}
+
 
