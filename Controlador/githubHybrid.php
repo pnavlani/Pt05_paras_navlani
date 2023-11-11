@@ -1,4 +1,5 @@
 <?php
+/* Paras Navlani*/
 require_once '../vendor/autoload.php';
 
 use Hybridauth\Hybridauth;

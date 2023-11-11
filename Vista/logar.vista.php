@@ -24,8 +24,11 @@
 
        <div class="enllaç">
          <img src="../img/ui.svg">
-         <?php require '../Controlador/autentificacioGoogle.php'?>
-        <a href="<?php echo $client->createAuthUrl() ?>">Iniciar sessió amb Google</a>
+         <?php require '../Controlador/autentificacioGoogle.php'?> 
+
+        
+         
+       <a href="<?php echo $client->createAuthUrl() ?>">Iniciar sessió amb Google</a> 
        </div>
 
     

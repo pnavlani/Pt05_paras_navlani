@@ -1,5 +1,9 @@
 <?php
+ /*Paras Navlani */
   require_once 'googleAuth.php';
+ require_once '../Model/connexio.php';
+
+  
 
 // authenticate code from Google OAuth Flow
 if (isset($_GET['code'])) {
@@ -11,7 +15,15 @@ if (isset($_GET['code'])) {
   $google_account_info = $google_oauth->userinfo->get();
   $email =  $google_account_info->email;
   $name =  $google_account_info->name;
+
+  // iniciar sessio
+
+  session_start();
+  $_SESSION['email'] = $email;
+  $_SESSION['usuari'] = $name;
+  }
+  
+
+
  
-  // now you can use this profile info to create account in your website and make user logged in.
-}
 ?>
