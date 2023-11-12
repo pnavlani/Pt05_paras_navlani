@@ -3,7 +3,7 @@
  * Autor: Paras Navlani
  */
 require_once ('../Model/connexio.php'); 
-require_once './autentificacioGoogle.php';
+/* require_once './autentificacioGoogle.php'; */
 
 session_start();
 

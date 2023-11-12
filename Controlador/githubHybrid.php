@@ -1,44 +1,62 @@
 <?php
 /* Paras Navlani*/
-require_once '../vendor/autoload.php';
+require '../hybridauth/src/autoload.php';
 
-use Hybridauth\Hybridauth;
+/* require_once '../Model/connexio.php'; */
 
-$config = [
-    'callback'=> 'http://localhost/githubHybrid.php',
-    'providers'=> [
-        'Github' => [
-            'enabled' => true,
-            'keys' => [
-                'id' => '',
-                'secret'=> '',
-            ]
-        ]
-    ]
+    $config = [
+        'callback' => 'http://localhost/Practiques/Servidor/Pt05_paras_navlani/Controlador/usuari.php',
+    
+        'keys' => [
+            'key' => '8c87a06a9e6fd9040b35',
+            'secret' => '623ddcc86a5d44672f34fbdabead071662a4ed0c',
+        ],
     ];
 
+    $login = oauth($config);
+    $pdo = conectar();
+    $email = $login->email;
+    $username = $login->displayName;
+    iniciSessioOauth($pdo, $email, $username);
+   
+   
 
-    $hybridauth = new Hybridauth($config);
-
-    if($_SERVER['REQUEST_METHOD'] === 'POST ') {
-        $adapter = $hybridauth->authenticate('Github');
-        $userProfile = $adapter->getUserProfile();
-
-        $_SESSION['email'] = $userProfile->email;
-
-        header('Location: usuari.php');
-        exit;
-    }else if(isset($_GET['logout'])){
-
-        $hybridauth->disconnectAllAdapters();
-        header('Location: logar.php');
-        exit;
-    }else{
-          // Mostra un formulari per a iniciar sessió
-        echo '<form method="post" action="githubHybrid.php">';
-        echo '<input type="submit" value="Iniciar sessió amb GitHub">';
-        echo '</form>';
+    function alert(){
+        missatge("No s'ha pogut conectar amb el servidor de GitHub", "error");
     }
+    /**
+     * Funcio que comprova que el usuari i la contrasenya sigui correcte
+     * @param $config array amb la configuració de l'HybridAuth
+     * @return objecte amb les dades de l'usuari
+     */
+    function oauth($config){
+       $github = new Hybridauth\Provider\GitHub($config);
+        $github->authenticate();
+        $usuari = $github->getUserProfile();
+        $github->disconnect();
+        githubBDD($pdo, $email, $username);
+        return $usuari;
+    }
+
+    githubBDD($pdo, $email, $username){
+     // ara fem una consulta a la base de dades per veure si l'usuari ja existeix si no existeix l'afegim a la base de dades.
+     $statement = $connexio->prepare("SELECT * FROM usuaris WHERE email = '$email'");
+     $statement->execute();
+     if($statement->rowCount() == 0){
+         $statement = $connexio->prepare("INSERT INTO usuaris (usuari, email) VALUES ('$username', '$email')");
+         $statement->execute();
+     }
+     // finalment obrirem una sessio amb aquest usuari.
+     session_start();
+     $_SESSION['usuari'] = $username;
+     $_SESSION['email'] = $email;
+     // i redirigirem a la pagina de l'usuari.
+    }
+
+
+
+
+
     
 
 ?>

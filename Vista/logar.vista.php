@@ -22,16 +22,15 @@
         <input type="button" value="Recuperar Contrasenya"  onclick="window.location.href='recuperar.php'"> 
        <!-- <input type="button" value="Iniciar sessió amb GitHub"  onclick="window.location.href='githubHybrid.php'"> -->
 
-       <div class="enllaç">
+         <div class="enllaç">
          <img src="../img/ui.svg">
-         <?php require '../Controlador/autentificacioGoogle.php'?> 
-
-        
-         
+         <?php require '../Controlador/autentificacioGoogle.php'?>
        <a href="<?php echo $client->createAuthUrl() ?>">Iniciar sessió amb Google</a> 
+       </div>  
+        
+       <div class="enllaç">
+        <a href="../Controlador/githubHybrid.php">Iniciar sessió amb GitHub</a>
        </div>
-
-    
 
   </form>
 
