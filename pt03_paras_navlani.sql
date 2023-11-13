@@ -42,21 +42,20 @@ CREATE TABLE IF NOT EXISTS `articles` (
 
 INSERT INTO `articles` (`id`, `article`) VALUES
 (1, 'Incendio en la fábrica local: Un gran incendio arrasó con la fábrica textil local ayer por la noche. No se reportaron heridos, pero las pérdidas materiales son significativas. Las autoridades están investigando las causas del siniestro.'),
-(2, 'Java i JavaScript no son iguals'),
-(3, 'Java i JavaScript no son iguals'),
-(4, 'Java i JavaScript no son iguals'),
-(5, 'Java i JavaScript no son iguals'),
-(6, 'Java i JavaScript no son iguals'),
-(7, 'Java i JavaScript no son iguals'),
-(8, 'Java i JavaScript no son iguals'),
-(9, 'Java i JavaScript no son iguals'),
-(10, 'Java i JavaScript no son iguals'),
-(11, 'Java i JavaScript no son iguals'),
-(12, 'Java i JavaScript no son iguals'),
-(13, 'Java i JavaScript no son iguals'),
-(14, 'Java i JavaScript no son iguals'),
-(15, 'Java i JavaScript no son iguals'),
-(32, 'C i C++no son iguals');
+(2, 'Nueva ley de educación: El gobierno aprobó una nueva ley de educación que promueve la inclusión digital. Todos los estudiantes de escuelas públicas recibirán una tablet para sus estudios. Se espera que la medida entre en vigor el próximo año escolar.'),
+(3, 'Avances en la vacuna contra el COVID-19: Científicos reportan un avance significativo en la vacuna contra el COVID-19. Los resultados preliminares de los ensayos clínicos son prometedores. Se espera su aprobación para finales de este año.'),
+(4, 'Elecciones presidenciales: Las elecciones presidenciales se llevarán a cabo el próximo mes. Los candidatos están en plena campaña para ganar votantes. Se espera una alta participación ciudadana.'),
+(5, 'Desastre natural en la región montañosa: Un fuerte terremoto sacudió la región montañosa ayer por la noche. Las autoridades reportan numerosas víctimas y daños estructurales. Se están coordinando esfuerzos de rescate y ayuda.'),
+(6, 'Descubrimiento arqueológico: Arqueólogos descubrieron una antigua tumba egipcia intacta. El hallazgo incluye artefactos y jeroglíficos bien conservados. Los expertos esperan que este descubrimiento arroje luz sobre la historia del antiguo Egipto.'),
+(7, 'Innovación tecnológica: Una empresa local lanzó un nuevo software de inteligencia artificial. Promete mejorar la eficiencia en la industria manufacturera. Las primeras pruebas han demostrado resultados prometedores.'),
+(8, 'Cambio climático: Los científicos advierten sobre el aumento de las temperaturas globales. El cambio climático podría tener graves consecuencias si no se toman medidas urgentes. Los líderes mundiales están discutiendo posibles soluciones.'),
+(9, 'Economía local: La economía local está experimentando un crecimiento significativo. Las empresas locales informan de un aumento en las ventas y la contratación de personal. Los expertos predicen un futuro económico positivo.'),
+(10, 'Salud pública: El número de casos de obesidad está aumentando a nivel nacional. Los expertos en salud pública instan a una mayor educación sobre la nutrición. Se están considerando nuevas políticas para promover estilos de vida saludables.'),
+(11, 'Cultura y arte: Se inauguró una nueva exposición de arte contemporáneo en el museo local. La muestra incluye obras de artistas emergentes y establecidos. La exposición estará abierta al público durante el próximo mes.'),
+(12, 'Deporte: El equipo local ganó el campeonato nacional de fútbol. Fue un partido reñido que se decidió en tiempo extra. Los fanáticos celebraron la victoria en las calles de la ciudad.'),
+(13, 'Ciencia y tecnología: La NASA anunció un nuevo proyecto para explorar Marte. El lanzamiento del rover está programado para el año próximo. El objetivo es buscar signos de vida en el planeta rojo.'),
+(14, 'Medio ambiente: Un nuevo informe destaca la amenaza de la deforestación en la selva amazónica. Los incendios forestales y la tala ilegal son las principales causas. Los ambientalistas piden una acción inmediata para proteger el pulmón del planeta.'),
+(15, 'Sociedad: Una nueva encuesta revela un aumento en el apoyo a los derechos de los animales. La mayoría de los encuestados considera que se deben fortalecer las leyes de protección animal');
 
 -- --------------------------------------------------------
 

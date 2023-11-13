@@ -2,7 +2,7 @@
 /* Paras Navlani*/
 require '../hybridauth/src/autoload.php';
 
-/* require_once '../Model/connexio.php'; */
+ require_once '../Model/connexio.php'; 
 
     $config = [
         'callback' => 'http://localhost/Practiques/Servidor/Pt05_paras_navlani/Controlador/usuari.php',
@@ -12,15 +12,7 @@ require '../hybridauth/src/autoload.php';
             'secret' => '623ddcc86a5d44672f34fbdabead071662a4ed0c',
         ],
     ];
-
-    $login = oauth($config);
-    $pdo = conectar();
-    $email = $login->email;
-    $username = $login->displayName;
-    iniciSessioOauth($pdo, $email, $username);
-   
-   
-
+    
     function alert(){
         missatge("No s'ha pogut conectar amb el servidor de GitHub", "error");
     }
@@ -29,31 +21,47 @@ require '../hybridauth/src/autoload.php';
      * @param $config array amb la configuració de l'HybridAuth
      * @return objecte amb les dades de l'usuari
      */
+    session_start();
+
     function oauth($config){
-       $github = new Hybridauth\Provider\GitHub($config);
-        $github->authenticate();
-        $usuari = $github->getUserProfile();
-        $github->disconnect();
-       // githubBDD($pdo, $email, $username);
-        return $usuari;
+       try {
+           $github = new Hybridauth\Provider\GitHub($config);
+           $github->authenticate();
+           $usuari = $github->getUserProfile();
+           $github->disconnect();
+           return $usuari;
+       } catch (Exception $e) {
+           echo "Error: " . $e->getMessage();
+       }
     }
-
-   /* githubBDD($pdo, $email, $username){
-     // ara fem una consulta a la base de dades per veure si l'usuari ja existeix si no existeix l'afegim a la base de dades.
-     $stmt = $pdo->prepare("SELECT * FROM usuaris WHERE email = '$email'");
-     $stmt->execute();
-     if($stmt->rowCount() == 0) {
-       $stmt = $connexio->prepare("INSERT INTO usuaris (usuari, email) VALUES ('$name', '$email')");
-       $stmt->execute();
-     }
-     // finalment obrirem una sessio amb aquest usuari.
-     session_start();
-     $_SESSION['usuari'] = $username;
-     $_SESSION['email'] = $email;
-     // i redirigirem a la pagina de l'usuari.
-    } */
-
-
+    
+    $usuari = oauth($config);
+    githubBDD($pdo, $usuari->email, $usuari->displayName, $usuari->token);
+    
+    function githubBDD($pdo, $email, $usuari, $token){
+        try {
+            $pdo = conectar();
+            // ara fem una consulta a la base de dades per veure si l'usuari ja existeix, si no existeix l'afegim a la base de dades.
+        $stmt = $pdo->prepare("SELECT * FROM usuaris WHERE email = :email");
+        $stmt->bindValue(':email', $email);
+        $stmt->execute();
+        $comprovar = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($comprovar) {
+            header("Location: usuari.php");
+        } else {
+            $stmt = $pdo->prepare("INSERT INTO usuaris (usuari, email, token) VALUES (:usuari, :email, :token)");
+            $stmt->bindValue(':usuari', $usuari);
+            $stmt->bindValue(':email', $email);
+            $stmt->bindValue(':token', $token);
+            $stmt->execute();
+        }
+            $_SESSION['usuari'] = $usuari;
+            $_SESSION['email'] = $email;
+            $_SESSION['token'] = $token;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
 
     
 
