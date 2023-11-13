@@ -34,28 +34,28 @@ require '../hybridauth/src/autoload.php';
         $github->authenticate();
         $usuari = $github->getUserProfile();
         $github->disconnect();
-        githubBDD($pdo, $email, $username);
+       // githubBDD($pdo, $email, $username);
         return $usuari;
     }
 
-    githubBDD($pdo, $email, $username){
+   /* githubBDD($pdo, $email, $username){
      // ara fem una consulta a la base de dades per veure si l'usuari ja existeix si no existeix l'afegim a la base de dades.
-     $statement = $connexio->prepare("SELECT * FROM usuaris WHERE email = '$email'");
-     $statement->execute();
-     if($statement->rowCount() == 0){
-         $statement = $connexio->prepare("INSERT INTO usuaris (usuari, email) VALUES ('$username', '$email')");
-         $statement->execute();
+     $stmt = $pdo->prepare("SELECT * FROM usuaris WHERE email = '$email'");
+     $stmt->execute();
+     if($stmt->rowCount() == 0) {
+       $stmt = $connexio->prepare("INSERT INTO usuaris (usuari, email) VALUES ('$name', '$email')");
+       $stmt->execute();
      }
      // finalment obrirem una sessio amb aquest usuari.
      session_start();
      $_SESSION['usuari'] = $username;
      $_SESSION['email'] = $email;
      // i redirigirem a la pagina de l'usuari.
-    }
+    } */
 
 
 
-
+    
 
     
 

@@ -2,9 +2,9 @@
   /**
    * Autor: Paras Navlani
    */
-
+    session_set_cookie_params(25 * 60);
    session_start();
-
+   
   require_once('../Model/connexio.php');
 
   $connexio = conectar();
@@ -87,10 +87,6 @@ if (isset($_POST['modificar'])) {
         $stmt = $connexio->prepare ("UPDATE articles SET article='$article' WHERE id=$id");
         $stmt->execute();
     }
-
-
-
-
 }
   
   include '../Vista/usuari.vista.php'
