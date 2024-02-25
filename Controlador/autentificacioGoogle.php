@@ -1,51 +1,63 @@
 <?php
  /*Paras Navlani */
  //FITXER CONFIG GOOGLE OAUTH2
-  require_once 'googleAuth.php';
+  require_once '../Controlador/googleAuth.php';
  require_once '../Model/connexio.php';
 
- $token = null;
-
-// Autentificar codi de Google OAuth 
-if (isset($_GET['code'])) {
-  $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-  $client->setAccessToken($token['access_token']);
+  if (isset($_GET['code'])) {
+    $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+    //Continua nomes si 'acces_token' esta present
+    if (isset($token['access_token'])) {
+        $client->setAccessToken($token['access_token']);
+    $client->setAccessToken($token['access_token']);
   
-  //Aconseguir informació d'usuari
-  $google_oauth = new Google_Service_Oauth2($client);
-  $google_account_info = $google_oauth->userinfo->get();
-  $email =  $google_account_info->email;
-  $name =  $google_account_info->name;
-  $token = $google_account_info->id;
+    //aconseguir info de perfil
+    $google_oauth = new Google_Service_Oauth2($client);
+    $google_account_info = $google_oauth->userinfo->get();
+    $userinfo = [
+      'usuari' => $google_account_info['givenName'],
+      'email' => $google_account_info['email'],
+      'token' => $google_account_info['id'],
+    ];
+    $connexio = conectar();
+    $statement = $connexio->prepare("SELECT * FROM usuaris WHERE email = '{$userinfo['email']}'");
+    $statement->execute();
+    if($statement->rowCount() == 0){
+      $statement = $connexio->prepare("INSERT INTO usuaris (usuari, email, token) VALUES ('{$userinfo['usuari']}', '{$userinfo['email']}', {$userinfo['token']})");
 
- //Comprovar si l'usuari existeix 
- $stmt = $connexio->prepare("SELECT * FROM usuaris WHERE email = '$email'");
- $stmt->execute();
- //Si l'usuari no existeix doncs s'afegirà a la BDD
- $comprovar = $stmt->fetch(PDO::FETCH_ASSOC);
- if(!$comprovar) {
-     $stmt = $pdo->prepare("INSERT INTO usuaris (usuari, email, token) VALUES (:usuari, :email, :token)");
-     $stmt->bindValue(':usuari', $name);
-     $stmt->bindValue(':email', $email);
-     $stmt->bindValue(':token', $token);
-     $stmt->execute();
- }
+        $statement->execute();
+        if ($statement) {
+          $token = $userinfo['token'];
+          header('Location: ../Controlador/usuari.php');
+        } else {
+          echo "User is not created";
+          die();
+        }
 
-  // Guardem Dades
-  $_SESSION["token"] = $token;
-  $_SESSION['email'] = $email;
-  $_SESSION['usuari'] = $name;
-
-  } else{
-    if(!isset($SESSION['token'])){
-    //  header('Location: index.php');
+    }else{
+      
+      $userinfo = $statement->fetch(PDO::FETCH_ASSOC);
+      $token = $userinfo['token'];
+      header('Location: ../Controlador/usuari.php');
     }
-
-    //Comprovem si el token del usuari ja existeix
-    $stmt = "SELECT * FROM usuaris WHERE token='$token'";
+ 
+    //guardem la dada de usuari en la sessio
+    $_SESSION['user_token'] = $token;
   }
+  } else {
+    if (!isset($_SESSION['user_token'])) {
+      header("Location: ../index.php");
+      die();
+    }
   
-
+    // comprovem si usuari existeix en la bdd
+    $statement = $connexio->prepare("SELECT * FROM usuaris WHERE token ='{$_SESSION['user_token']}'");
+    $statement->execute();
+    if ($statement->rowCount() > 0) {
+      // usuari existeix
+      $userinfo = $statement->fetch(PDO::FETCH_ASSOC);
+    }
+  }
 
  
-?>
+?> 

@@ -3,9 +3,10 @@
  * Autor: Paras Navlani
  */
 require_once ('../Model/connexio.php'); 
-/* require_once './autentificacioGoogle.php'; */
+require_once ('../Controlador/googleAuth.php'); 
 
-session_start();
+
+//session_start();
 //Ens conectem a la BDD   
 $connexio = conectar();
 $error = "";

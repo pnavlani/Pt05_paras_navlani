@@ -5,7 +5,7 @@ require '../hybridauth/src/autoload.php';
  require_once '../Model/connexio.php'; 
 
     $config = [
-        'callback' => 'http://localhost/Practiques/Servidor/Pt05_paras_navlani/Controlador/usuari.php',
+        'callback' => 'http://localhost/Practiques/Servidor/Pt05_paras_navlani/Controlador/autentifica',
     
         'keys' => [
             'key' => '8c87a06a9e6fd9040b35',

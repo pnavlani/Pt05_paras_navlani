@@ -10,8 +10,7 @@
 <body>
  <!--En aquest div mostrarem una barra en que es trobara l'opció de Tancar Sesssió  -->   
 <div class="navbar">
-   
-    <a href="../index.php">Tancar Sessió</a> 
+    <a href="../Controlador/logout.php">Tancar Sessió</a> 
 </div>
   <!--En aquest div guardarem els articles -->
 <div class="contenidor">
