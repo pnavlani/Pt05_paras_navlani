@@ -5,6 +5,5 @@
 - Tema Recaptcha em funciona, si fallo tres vegades en inciar sessió a quarta em surtirà recaptcha i no s'anirà fins que fegi un login correcte
 
  # MILLORES
- - Guardar a la BDD les dades dels usuaris en HinbridAuth 
  - Fer la logica de recuperar Contrasenya
    
